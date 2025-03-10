@@ -49,3 +49,13 @@ exports.deleteAccount = async (req, res) => {
     res.status(500).json({ error: "Database error" });
   }
 };
+exports.loginAccount = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const [rows] = await db.query("SELECT * FROM users WHERE name = ? AND email = ?", [name, email]);
+    if (rows.length === 0) return res.status(401).json({ error: "Sai tài khoản hoặc mật khẩu" });
+    res.json({ message: "Đăng nhập thành công" });
+  } catch (error) {
+    res.status(500).json({ error: "Lỗi hệ thống" });
+  }
+};
