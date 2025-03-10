@@ -21,7 +21,7 @@ exports.getAccountById = async (req, res) => {
 
 exports.createAccount = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { name, email } = req.body;
     await db.query("INSERT INTO users (name, email) VALUES (?, ?)", [name, email]);
     res.status(201).json({ message: "Account created" });
   } catch (error) {
@@ -31,7 +31,7 @@ exports.createAccount = async (req, res) => {
 
 exports.updateAccount = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { name, email } = req.body;
     const [result] = await db.query("UPDATE users SET name = ?, email = ? WHERE id = ?", [name, email, req.params.id]);
     if (result.affectedRows === 0) return res.status(404).json({ error: "Account not found" });
     res.json({ message: "Account updated" });
