@@ -22,9 +22,9 @@ exports.getAccountById = async (req, res) => {
 
 exports.createAccount = async (req, res) => {
   try {
-    const { name, email, age, password} = req.body;
+    const { name, email, age, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    await db.query("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, age, hashedPassword]);
+    await db.query("INSERT INTO users (name, email, age, password) VALUES (?, ?, ?, ?)", [name, email, age, hashedPassword]);
     res.status(201).json({ message: "Account created" });
   } catch (error) {
     res.status(500).json({ error: "Database error" });
