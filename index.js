@@ -4,7 +4,7 @@ const accountRoutes = require("./api/accountRoutes");
 
 const app = express();
 app.use(cors({
-    origin: ["http://localhost:3000", "https://your-frontend.vercel.app"],
+    origin: ["http://localhost:3000", "api-bero-flix.vercel.app"],
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization"
   }));

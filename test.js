@@ -1,10 +1,19 @@
 const mysql = require("mysql2");
-const config = require("./config/config");
 
-const pool = mysql.createPool({ ...config.db });
+const connection = mysql.createConnection({
+  host: "switchback.proxy.rlwy.net",
+  user: "root",
+  password: "ILNbCusGBoAFuXHsZTMyNMfwJGpzHlhr",
+  database: "railway",
+  port: 3306,
+  ssl: { rejectUnauthorized: false }
+});
 
-pool.query("SELECT 1", (err, results) => {
-  if (err) console.error("Lỗi kết nối DB:", err);
-  else console.log("Kết nối MySQL thành công!");
-  process.exit();
+connection.connect((err) => {
+  if (err) {
+    console.error("Database connection failed:", err);
+  } else {
+    console.log("Connected to database successfully!");
+  }
+  connection.end();
 });
