@@ -22,7 +22,7 @@ exports.getAccountById = async (req, res) => {
 exports.createAccount = async (req, res) => {
   try {
     const { username, password } = req.body;
-    await db.query("INSERT INTO users (name, email) VALUES (?, ?)", [username, password]);
+    await db.query("INSERT INTO users (name, email) VALUES (?, ?)", [name, email]);
     res.status(201).json({ message: "Account created" });
   } catch (error) {
     res.status(500).json({ error: "Database error" });
@@ -32,7 +32,7 @@ exports.createAccount = async (req, res) => {
 exports.updateAccount = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const [result] = await db.query("UPDATE users SET name = ?, email = ? WHERE id = ?", [username, password, req.params.id]);
+    const [result] = await db.query("UPDATE users SET name = ?, email = ? WHERE id = ?", [name, email, req.params.id]);
     if (result.affectedRows === 0) return res.status(404).json({ error: "Account not found" });
     res.json({ message: "Account updated" });
   } catch (error) {
